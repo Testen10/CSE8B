@@ -1,0 +1,30 @@
+Converter method test & Combiner method test
+
+Converter method test // public static double CtF_converter(double temp, boolean isCelcius)
+    1. converter_test1(input: 0, true)
+    2. converter_test2(input: 32, false)
+
+Combiner method test // public static int combiner(int inch, int foot)
+    1. combiner_test1(input: 1, 5)
+    2. combiner_test2(input: 0, 2)
+    3. combiner_test3(input: 2.5, 3.0)
+
+Tester Library v.3.0
+-----------------------------------
+Tests defined in the class: DesignRecipeExamples:
+---------------------------
+DesignRecipeExamples:
+---------------
+new DesignRecipeExamples:1(
+ this.converter__test1 = 32.0
+ this.converter__test2 = 0.0
+ this.combiner_test1 = 61
+ this.combiner_test2 = 24)
+---------------
+No test methods found.
+
+DesignRecipeExamples.java:60: error: incompatible types: possible lossy conversion from double to int
+    int combiner_test3 = combiner(2.5, 3.0); // expected error since the type of parameter inch and foot are int, not double
+                                  ^
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+1 error
