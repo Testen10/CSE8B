@@ -57,6 +57,8 @@ class DesignRecipeExamples {
     // problem4 test
     int combiner_test1 = combiner(1, 5); // expected 61
     int combiner_test2 = combiner(0, 2); // expected 24
-    int combiner_test3 = combiner(2.5, 3.0); // expected error since the type of parameter inch and foot are int, not double
+
+    // sample test where error occurs
+    // int combiner_test3 = combiner(2.5, 3.0); // expected error since the type of parameter inch and foot are int, not double
 
 }
