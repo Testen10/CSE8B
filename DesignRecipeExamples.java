@@ -9,11 +9,11 @@ class DesignRecipeExamples {
         return a * x * x + b * x + c;
     }
 
-    public static double CtF_converter(double temp, boolean isCelcius){
+    public static int CtF_converter(int temp, boolean isCelcius){
         /* docstring
           Input
           double temp: the temperature to be converted
-          boolean isCelcius: if variable temp is celcius, isCelcius is true, vice versa\
+          boolean isCelcius: if variable temp is celcius, isCelcius is true, vice versa
           
           Output:
           converted temperature
@@ -51,14 +51,15 @@ class DesignRecipeExamples {
     int quad_test2 = quadraticEquation(4, 4, 1, 4); // expected 65
 
     // problem3 test
-    double converter__test1 = CtF_converter(0, true); // expected 32
-    double converter__test2 = CtF_converter(32, false); // expected 0
+    int converter__test1 = CtF_converter(0, true); // expected 32
+    int converter__test2 = CtF_converter(32, false); // expected 0
 
     // problem4 test
     int combiner_test1 = combiner(1, 5); // expected 61
     int combiner_test2 = combiner(0, 2); // expected 24
 
-    // sample test where error occurs
-    // int combiner_test3 = combiner(2.5, 3.0); // expected error since the type of parameter inch and foot are int, not double
+    // all integer parameter for combiner won't produce any error
+        // case1: negative number // won't produce error since the equation used is multiplication
+        // case2: 0 // won't produce error since multiplying 0 will just produce 0 (not using division, hence 0 won't cause error)
 
 }
