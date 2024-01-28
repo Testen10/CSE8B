@@ -110,6 +110,7 @@ class CommentReply{
 
     boolean hasMention(String username){
         ArrayList<String> text_AList = new ArrayList<String>(Arrays.asList(text.split(" ")));;
+        if(replyto.hasMention(username)){return true;}
         if(text_AList.contains("@"+username)){ return true; }
         return false;
     }

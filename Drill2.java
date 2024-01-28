@@ -33,5 +33,5 @@ class Drill2{
     C2 temp = new C2(9,2.5);
     C1 second = new C1(temp);
 
-    C1 third = new C1(temp);
+    C1 third = new C1(first);
 }

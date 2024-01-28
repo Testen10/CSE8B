@@ -9,7 +9,7 @@ class Drill4{
 
     String phaseOfWater(int num){
         if(num>=100){return "vapor";}
-        else if(num>=0){return "liquid";}
+        else if(num>0){return "liquid";}
         else{return "solid";}
     }
 
