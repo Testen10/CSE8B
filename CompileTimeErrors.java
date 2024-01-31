@@ -1,7 +1,6 @@
-import tester.*;
 
 class CompileTimeErrors{
-    public static String checkNumber(double myNumber){
+    String checkNumber(double myNumber){
         if (myNumber > 0){
             return "The number " + myNumber + " is positive.";
         }
