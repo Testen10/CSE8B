@@ -80,7 +80,7 @@ class VideoComment implements Comment{
 
         return author.username+"\n"
                 +likes+" likes; "+replies+" replies"
-                +"\n"+text;
+                +"\n"+text+"\n";
     }
     public int totalInteractions(){
         /*
@@ -140,9 +140,9 @@ class ReplyComment implements Comment{
 
     public String unrollCommentThread(){
         return replyTo.unrollCommentThread()
-        +"\n"+author.username
+        +author.username
         +"\n"+likes+" likes"
-        +"\n"+text;
+        +"\n"+text+"\n";
     }
 }
 

@@ -93,7 +93,7 @@ class Fraction implements Number{
         return other;
     }
     public String toString(){
-        return Double.toString(this.toDouble());
+        return Integer.toString(n)+"/"+Integer.toString(d);
     }
     public double toDouble(){
         return (double) n/d;
