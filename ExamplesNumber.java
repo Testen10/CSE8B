@@ -77,8 +77,8 @@ class Fraction implements Number{
         Number ans;
         if(isInteger(temp)){ ans = new WholeInteger((int)temp); }
         else{ 
-            int temp_n = this.numerator()*other.denominator()+other.numerator();
-            int temp_d = other.denominator();
+            int temp_n = this.numerator()*other.denominator()+other.numerator()*this.denominator();
+            int temp_d = other.denominator()*this.denominator();
             ans = new Fraction(
                 temp_n/LCD(temp_n, temp_d),
                 temp_d/LCD(temp_n, temp_d));
