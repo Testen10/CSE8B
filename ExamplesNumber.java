@@ -15,10 +15,15 @@ class WholeInteger implements Number{
         double temp = this.toDouble()+other.toDouble();
         Number ans;
         if(isInteger(temp)){ ans = new WholeInteger((int)temp); }
-        else{  ans = new Fraction(this.numerator()+other.numerator(), other.denominator()); }
-
-        return ans;
-    }
+        else{ 
+            int temp_n = this.numerator()*other.denominator()+other.numerator();
+            int temp_d = other.denominator();
+            ans = new Fraction(
+                temp_n/LCD(temp_n, temp_d),
+                temp_d/LCD(temp_n, temp_d));
+            }
+            return ans;
+        }
     public Number multiply(Number other){
         double temp = this.toDouble()*other.toDouble();
         Number ans;
@@ -72,7 +77,7 @@ class Fraction implements Number{
         Number ans;
         if(isInteger(temp)){ ans = new WholeInteger((int)temp); }
         else{ 
-            int temp_n = this.numerator()*other.denominator();
+            int temp_n = this.numerator()*other.denominator()+other.numerator();
             int temp_d = other.denominator();
             ans = new Fraction(
                 temp_n/LCD(temp_n, temp_d),
