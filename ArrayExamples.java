@@ -37,9 +37,9 @@ class ArrayExamples {
 
         if(bool_lst.length == 0){return false;}
         for(boolean elem:bool_lst){
-            if(!elem){return false;}
+            if(elem){return true;}
         }
-        return true;
+        return false;
     }
     boolean allOutsideRange(double[] dbl_lst, double low, double high){
         /*
