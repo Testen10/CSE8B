@@ -124,8 +124,8 @@ class ArrayExamples {
 
         // test for logicalOr method
         t.checkExpect(logicalOr(new boolean[]{}),false); // test1 - empty array
-        t.checkExpect(logicalOr(new boolean[]{false,true,true,true}),false); // test2 - false included
-        t.checkExpect(logicalOr(new boolean[]{true,true,true}),true); // test3 - false not included
+        t.checkExpect(logicalOr(new boolean[]{false,false,false,true}),true); // test2 - true included
+        t.checkExpect(logicalOr(new boolean[]{false,false,false}),false); // test3 - true not included
 
         // test for allOutsideRange method
         t.checkExpect(allOutsideRange(new double[]{},0,1),true); // test1 - empty array
