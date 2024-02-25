@@ -1,5 +1,6 @@
 import java.nio.file.*;
 import java.io.IOException;
+import java.util.*;
 class FileHelper {
     static String[] getLines(String path) {
         try {
@@ -12,10 +13,12 @@ class FileHelper {
     }
 }
 
+// contains query
 class ContainsQuery{
     String s;
+    boolean not;
     ContainsQuery(String s){
-        this.s = s;
+        this.s = s.replace("'","");
     }
 
     boolean matches(String compare){
@@ -24,36 +27,24 @@ class ContainsQuery{
     }
 }
 
-
 class StringSearchMilestone2{
     public static void main(String[] args){
         if(args.length==0){ System.out.println("Not enough command inputted"); return; }
-
+        
         ContainsQuery cQ = null;
         String q_command = "";
-        int q_val_int = -1;
 
+        //query exist
         if(args.length == 2){ 
-            if(args[1].contains("contains")){
+            if(args[1].substring(0,"contains=".length()).equals("contains=")){
                 q_command = "contains";
-                cQ = new ContainsQuery(args[1].substring(q_command.length()+1,args[1].length()));
+                cQ = new ContainsQuery(args[1].substring("contains=".length()+1,args[1].length()));
             }
-            else{System.out.println("Unvalid command"); return;}
-
         }
-    
+
         FileHelper fileHelper = new FileHelper();
         for(String elem:fileHelper.getLines(args[0])){
-            if(cQ!=null){
-                switch(q_command){
-                    case "contains":
-                        if(!cQ.matches(elem)){continue;}
-                        break;
-                    default:
-                        return;
-                    }
-                }
-                
+            if(cQ!=null){ if(!cQ.matches(elem)){continue;} }
             System.out.println(elem);
         }
     }
