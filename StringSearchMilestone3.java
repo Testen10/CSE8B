@@ -19,82 +19,101 @@ interface Query{
 //length query
 class LengthQuery implements Query{
     int num;
-    LengthQuery(String s){
+    boolean not;
+    LengthQuery(String s, boolean not){
         num = Integer.parseInt(s);
+        this.not = not;
     }
 
     public boolean matches(String compare){
-        if(compare.split(" ").length==num){return true;}
+        if(compare.length()==num&&!not
+        || compare.length()!=num&&not){return true;}
         return false;
     }
 }
 // greater query
 class GreaterQuery implements Query{
     int num;
-    GreaterQuery(String s){
+    boolean not;
+    GreaterQuery(String s,boolean not){
         num = Integer.parseInt(s);
+        this.not = not;
     }
 
     public boolean matches(String compare){
-        if(compare.split(" ").length>num){return true;}
+        if(compare.length()>num&&!not
+        || !(compare.length()>num)&&not){return true;}
         return false;
     }
 }
 // less query
 class LessQuery implements Query{
     int num;
-    LessQuery(String s){
+    boolean not;
+    LessQuery(String s, boolean not){
         num = Integer.parseInt(s);
+        this.not = not;
     }
 
     public boolean matches(String compare){
-        if(compare.split(" ").length<num){return true;}
+        if(compare.length()<num&&!not
+        ||!(compare.length()<num)&&not){return true;}
         return false;
     }
 }
 // contains query
 class ContainsQuery implements Query{
     String s;
-    ContainsQuery(String s){
-        this.s = s;
+    boolean not;
+    ContainsQuery(String s,boolean not){
+        this.s = s.replace("'","");
+        this.not = not;
     }
 
     public boolean matches(String compare){
-        if(compare.contains(s)){return true;}
+        if(compare.contains(s)&&!not
+        ||!compare.contains(s)&&not){return true;}
         return false;
     }
 }
 // starts query
 class StartsQuery implements Query{
     String s;
-    StartsQuery(String s){
-        this.s = s;
+    boolean not;
+    StartsQuery(String s,boolean not){
+        this.s = s.replace("'","");
+        this.not = not;
     }
 
     public boolean matches(String compare){
-        String[] temp = compare.split(" ");
-        if(temp[0].equals(s)){return true;}
+        if(compare.substring(0,s.length()).equals(s)&&!not
+        ||!(compare.substring(0,s.length()).equals(s))&&not){return true;}
         return false;
     }
 }
 // ends query
 class EndsQuery implements Query{
     String s;
-    EndsQuery(String s){
-        this.s = s;
+    boolean not;
+    EndsQuery(String s,boolean not){
+        this.s = s.replace("'","");
+        this.not = not;
     }
 
     public boolean matches(String compare){
-        String[] temp = compare.split(" ");
-        if(temp[temp.length-1].equals(s)){return true;}
+        if(compare.substring(compare.length()-s.length(),compare.length()).equals(s)&&!not
+        ||!(compare.substring(compare.length()-s.length(),compare.length()).equals(s))&&not){return true;}
+        
         return false;
     }
 }
+
 
 class StringSearch{
     static Query readQuery(String q){
         Query query = null;
         String q_command = "";
+        boolean querynot = false;
         String[] q_command_list = new String[]{"length=", // 0
                                                "greater=", // 1
                                                "less=", // 2
@@ -102,38 +121,44 @@ class StringSearch{
                                                "starts=", // 4
                                                "ends="}; //5
 
+        
+        if(q.substring(0,4).equals("not(")
+            && q.substring(q.length()-1,q.length()).equals(")")){
+                querynot = true;
+                q = q.substring(4,q.length()-1);
+        }
 
         //length
         if(q.substring(0,Math.min(q_command_list[0].length(),q.length())).equals(q_command_list[0])){
             q_command = q_command_list[0];
-            query = new LengthQuery(q.substring(q_command.length(),q.length()));
+            query = new LengthQuery(q.substring(q_command.length(),q.length()),querynot);
         }
         //greater
         else if(q.substring(0,Math.min(q_command_list[1].length(),q.length())).equals(q_command_list[1])){
             q_command = q_command_list[1];
-            query = new GreaterQuery(q.substring(q_command.length(),q.length()));
+            query = new GreaterQuery(q.substring(q_command.length(),q.length()),querynot);
         }
         //less
         else if(q.substring(0,Math.min(q_command_list[2].length(),q.length())).equals(q_command_list[2])){
             q_command = q_command_list[2];
-            query = new LessQuery(q.substring(q_command.length(),q.length()));
+            query = new LessQuery(q.substring(q_command.length(),q.length()),querynot);
         }
         //contains
         else if(q.substring(0,Math.min(q_command_list[3].length(),q.length())).equals(q_command_list[3])){
             q_command = q_command_list[3];
-            query = new ContainsQuery(q.substring(q_command.length(),q.length()));
+            query = new ContainsQuery(q.substring(q_command.length(),q.length()),querynot);
         }
         //starts
         else if(q.substring(0,Math.min(q_command_list[4].length(),q.length())).equals(q_command_list[4])){
             q_command = q_command_list[4];
-            query = new StartsQuery(q.substring(q_command.length(),q.length()));
+            query = new StartsQuery(q.substring(q_command.length(),q.length()),querynot);
         }
         //ends
         else if(q.substring(0,Math.min(q_command_list[5].length(),q.length())).equals(q_command_list[5])){
             q_command = q_command_list[5];
-            query = new EndsQuery(q.substring(q_command.length(),q.length()));
+            query = new EndsQuery(q.substring(q_command.length(),q.length()),querynot);
         }
-        else{System.out.println("Unvalid command"); }
+        else{System.out.println("Unvalid command in query"); }
         return query;
     }
     public static void main(String[] args){
