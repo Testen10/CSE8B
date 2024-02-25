@@ -91,7 +91,7 @@ class EndsQuery implements Query{
     }
 }
 
-class StringSearchMilestone3{
+class StringSearch{
     static Query readQuery(String q){
         Query query = null;
         String q_command = "";
