@@ -81,7 +81,7 @@ class CompareLists{
     return max;
   }
 
-  <E> List<E> lesserthan(List<E> lst, E standard, Comparator<E> comp){
+  <E> List<E> lesserthan(List<E> lst, Comparator<E> comp,E standard){
     List<E> ans = new ArrayList<>();
     for(E elem:lst){
       if(comp.compare(elem, standard)<0){ans.add(elem);}
@@ -157,9 +157,9 @@ class CompareLists{
     t.checkExpect(maximum(new Point[]{new Point(0,0), new Point(2,2), new Point(2,4)} ,new PointDistanceCompare()), new Point(2,4)); //3
 
     // lesserthan test
-    t.checkExpect(lesserthan(Arrays.asList("a", "b", "c"), "c", new StringCompare()), Arrays.asList("a", "b")); //1
-    t.checkExpect(lesserthan(Arrays.asList("a", "ab", "abc"), "a",new StringLengthCompare()), new ArrayList<String>()); //2
-    t.checkExpect(lesserthan(Arrays.asList(new Point(0,0), new Point(1,2), new Point(3,2), new Point(2,2)), new Point(1,3), new PointCompare()),  Arrays.asList(new Point(0,0), new Point(1,2))); //3
+    t.checkExpect(lesserthan(Arrays.asList("a", "b", "c"), new StringCompare(), "c"), Arrays.asList("a", "b")); //1
+    t.checkExpect(lesserthan(Arrays.asList("a", "ab", "abc"),new StringLengthCompare(), "a"), new ArrayList<String>()); //2
+    t.checkExpect(lesserthan(Arrays.asList(new Point(0,0), new Point(1,2), new Point(3,2), new Point(2,2)), new PointCompare(), new Point(1,3)), Arrays.asList(new Point(0,0), new Point(1,2))); //3
 
     // inOrder test
     t.checkExpect(inOrder(Arrays.asList("c", "b", "a") ,new StringCompare()), false); //1
